@@ -1,6 +1,7 @@
 class Micropost < ActiveRecord::Base
-  attr_accessible :content
+  attr_accessible :content, :company_id
   belongs_to :user
+  belongs_to :company
 
   validates :content, presence: true, length: { maximum: 140 }
   validates :user_id, presence: true

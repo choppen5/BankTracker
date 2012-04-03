@@ -1,4 +1,13 @@
 SampleApp::Application.routes.draw do
+  resources :issues
+  namespace :users do
+        resources :issues
+    end
+    
+  resources :cases
+
+  resources :companies
+
   resources :users do
     member do
       get :following, :followers
