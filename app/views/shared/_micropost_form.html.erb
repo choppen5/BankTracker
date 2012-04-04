@@ -1,10 +1,30 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-    <%= collection_select(:micropost, :company_id, Company.all, :id, :name, :prompt => true) %>
-  </div>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
-  </div>
+ 
+ <% if @user.issues.first.company.nil? %>
+	  <div class="field">
+	    <%= collection_select(:micropost, :company_id, Company.all, :id, :name, :prompt => true) %>
+	  </div>
+  <% else %>
+      <div> 
+		<b> 
+	    <%= @user.issues.first.company.name 	%>
+	    </b>
+		<p> 
+			<%= link_to("My Story", @user.issues.first) %> 
+		</p>
+	
+		<%= f.hidden_field(:company_id, :value => @user.issues.first.company.id) %>
+	   <div>
+		
+		  <div class="field">
+		    <%= f.text_area :content, placeholder: "Update your " + @user.issues.first.company.name + " issue..." %>
+		  </div>
+		
+  <% end %>	
+
+
+
+
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
