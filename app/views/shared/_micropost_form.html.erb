@@ -1,7 +1,9 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
  
- <% if @user.issues.first.company.nil? %>
+ <% unless @user.issues.first.nil?%> haven't created an issue.
+
+  <% if @user.issues.first.company.nil? %>
 	  <div class="field">
 	    <%= collection_select(:micropost, :company_id, Company.all, :id, :name, :prompt => true) %>
 	  </div>
@@ -22,9 +24,10 @@
 		  </div>
 		
   <% end %>	
-
-
-
-
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+
+ <% else %>
+   <%= link_to("Add a bank", @user) %>  
+ <% end %>
+ 
 <% end %>
