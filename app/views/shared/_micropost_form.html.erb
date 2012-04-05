@@ -1,7 +1,7 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
  
- <% unless @user.issues.first.nil?%> haven't created an issue.
+ <% unless @user.issues.first.nil?%> 
 
   <% if @user.issues.first.company.nil? %>
 	  <div class="field">

@@ -7,7 +7,8 @@
         <%= @user.name %>  
       </h1> 
     </section>
-    <% unless @user.issues.first.nil? %> 
+ 
+    <% unless (@user.issues.first.nil?) %> 
       <h3>Company:</h3>
       <%= @user.issues.first.company.name %>
 	  <section>
@@ -15,10 +16,11 @@
 	    <%= @user.issues.first.story %>
 	  </p>
 	  </section>
-    <% else %> 
+    <% else %>
+        <%if current_user?(@user) %> 
     	<section>
 	    <h1>Your Mortgage Company</h1>
-	    <%= form_for( @user.issues.build) do |user_form| %>	        
+	     <%= form_for( @user.issues.build) do |user_form| %>	        
 	        <div class="field">
 	         <%= collection_select(:issue, :company_id, Company.all, :id, :name, :prompt => true) %>
 	        </div>
@@ -28,18 +30,21 @@
 	        </div>
 		    <%= user_form.hidden_field(:user_id, :value => @user.id) %>
 	        <%= user_form.submit "Post", class: "btn btn-large btn-primary" %>
-	    <% end %>
+	      <% end %>
 	    </section>
+	    <% end %>
      <% end %>
+  
   </aside>
   <div class="span8">
     <%= render 'follow_form' if signed_in? %>
     
-	<% unless @user.issues.first.company.nil? %>
+     <% if current_user?(@user) %>
       <div class="postform">
         <%= render 'shared/micropost_form' %>
       </div>
-    <% end %>
+     <% end %>
+  
 
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
