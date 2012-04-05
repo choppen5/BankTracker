@@ -8,7 +8,7 @@
       </h1> 
     </section>
  
-    <% unless (@user.issues.first.nil?) %> 
+    <% unless (@user.issues.first.nil? or @user.issues.first.company.nil?) %> 
       <h3>Company:</h3>
       <%= @user.issues.first.company.name %>
 	  <section>

@@ -3,4 +3,7 @@ class Issue < ActiveRecord::Base
     
     belongs_to :user
     belongs_to :company
+    
+    validates :company_id, presence: true
+    validates :story, presence: true 
 end
