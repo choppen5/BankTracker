@@ -17,4 +17,9 @@
                                      confirm: "You sure?",
                                      title:   feed_item.content %>
   <% end %>
+  <span class = "minuteslogged">
+	<% unless feed_item.minutes.nil? %>
+	  <%= feed_item.minutes.to_s + " minutes logged" %>
+	<% end %>
+  </span>
 </li>

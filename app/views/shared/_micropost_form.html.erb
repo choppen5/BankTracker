@@ -8,20 +8,30 @@
 	    <%= collection_select(:micropost, :company_id, Company.all, :id, :name, :prompt => true) %>
 	  </div>
   <% else %>
-      <div> 
+      <div class= "companyname"> 
 		<b> 
 	    <%= @user.issues.first.company.name 	%>
 	    </b>
-		<p> 
+	  <div>
+		<div class= "companynumber">
+		  <%= @user.issues.first.company.phone 	%>
+		</div>	
+		<div class = "mystory"><p> 
 			<%= link_to("My Story", @user.issues.first) %> 
-		</p>
-	
+		</div>
+
 		<%= f.hidden_field(:company_id, :value => @user.issues.first.company.id) %>
-	   <div>
+	   
 		
 		  <div class="field">
 		    <%= f.text_area :content, placeholder: "Update your " + @user.issues.first.company.name + " issue..." %>
 		  </div>
+		 
+		<div class = "minutes"><p> 
+			<%= f.number_field(:minutes, placeholder: "Minutes spent",  :min =>0) %> 
+		</div>
+		
+		
 		
   <% end %>	
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>

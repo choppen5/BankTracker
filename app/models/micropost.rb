@@ -1,5 +1,5 @@
 class Micropost < ActiveRecord::Base
-  attr_accessible :content, :company_id
+    attr_accessible :content, :company_id, :minutes
   belongs_to :user
   belongs_to :company
 

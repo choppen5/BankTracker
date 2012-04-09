@@ -13,4 +13,9 @@
                                      confirm: "You sure?",
                                      title:   micropost.content %>
   <% end %>
+  <span class = "minuteslogged">
+	<% unless micropost.minutes.nil? %>
+	  <%= micropost.minutes.to_s + " minutes logged" %>
+	<% end %>
+  </span>	
 </li>
