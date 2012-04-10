@@ -17,18 +17,27 @@
     </div>
   </div>
 <% else %>
-  <div class="center hero-unit">
-    <h1>Welcome to BankTracker!</h1>
+  <div class="row-fluid">
+  <div class="span6">
+	<div class="hero-unit">
+    <h2><b>Welcome to BankTracker!</b></h2>
 
-    <h2>
-      <p>1. Sign in - choose your bank.</p>
+    
+      <p>1. Find your bank: <%= text_field :company, :name %> </p>
 	  <p>2. Track your calls and experience as a customer.</p>
-	  <p>3. Share your experience, get and give tips to others.</p>
-    </h2>
-
-    <%= link_to "Sign up now!", signup_path, 
-                                class: "btn btn-large btn-primary" %>
+	  <p>3. Share your experience, get tips from others.</p>
+    
+     
+	   <%= link_to "Sign up now!", signup_path, 
+                              class: "btn btn-large btn-primary" %>
+  	 </div>
+    
   </div>
+
+  <div class= "span6">
+	<p>Example </p>
+  </div>
+  </div>	
 
   
 <% end %>
