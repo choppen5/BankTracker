@@ -18,6 +18,7 @@
 
 
 $(document).ready(function(){
-  alert("ready!")
-   $('#company_name').autocomplete({source: "/autocomplete/companies"})
+   $('#company_name').autocomplete({
+    source: "/autocomplete/companies"
+    })
   })
