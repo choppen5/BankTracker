@@ -38,9 +38,51 @@
   </div>
 
   <div class= "span6">
-	<p>Example </p>
+	<div class="row-fluid">
+	<h3>BankTracker User Stories</h3>
+		
+    <%= will_paginate @users, :page_links => false  %>
+	
+	 		<div class= "row-fluid">
+			<% @users.each do |user| %>
+				<% unless (user.issues.first.nil? or user.issues.first.company.nil?) %>
+			      <div class="frontcompany"><b>Bank:</b>	
+				    <%= user.issues.first.company.name %>
+				  </div>	
+				  
+				  <div class="row-fluid">
+				    <div class="frontuser">
+				      <%= gravatar_for user %>
+					  <%= user.name %>
+					</div>					     
+				  </div>	
+				  <br>
+				
+				  <div class="frontstory"></div>
+				
+				  <div class="row-fluid">				
+				    <div class= "span8">	
+					  <b>Story:</b>
+					    <%= user.issues.first.story %>			  
+					</div>
+			 
+					<div class= "span4">	 
+					  <div class="frontinteractions">
+					  	 <% if user.microposts.any? %>
+					       <b>Updates (<%= user.issues.first.microposts.count %>)</b>
+					     <% end %>
+					  </div>
+					</div>											
+    			  </div>	
+			<% end %>
+            </div>
+	<% end %>
+			
+	
+     
   </div>
-  </div>	
+ </div>
+</div>	
 
   
 <% end %>
