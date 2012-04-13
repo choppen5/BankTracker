@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412061849) do
+ActiveRecord::Schema.define(:version => 20120413032703) do
 
   create_table "cases", :force => true do |t|
     t.integer  "user_id"
@@ -37,6 +37,9 @@ ActiveRecord::Schema.define(:version => 20120412061849) do
     t.text     "story",      :limit => 255
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+    t.string   "status"
+    t.string   "feeling"
+    t.text     "resolution"
   end
 
   create_table "microposts", :force => true do |t|
