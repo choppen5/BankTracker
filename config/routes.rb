@@ -3,6 +3,7 @@ SampleApp::Application.routes.draw do
   namespace :users do
         resources :issues
     end
+  get '/issues/templates/preview' => 'issues#preview'
     
   resources :cases
 

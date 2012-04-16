@@ -80,4 +80,8 @@ class IssuesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def preview
+    render :layout => false
+  end
 end
