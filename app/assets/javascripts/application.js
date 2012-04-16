@@ -5,20 +5,22 @@
 // or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
 //
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.//'#company_name').autocomplete({source: "/autocomplete/companies"}
-////= require_tree .
+// the compiled file.
+//
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
+
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
-//= require_tree .
-
-
+//= require_tree
+//= require_self
 
 $(document).ready(function(){
-   $('#company_name').autocomplete({
+  $('#company_name').autocomplete({
     source: "/autocomplete/companies"
-    })
   })
+
+  $('.markItUp').markItUp(mySettings);
+})
