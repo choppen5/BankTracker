@@ -14,6 +14,8 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
+//= require markitup
+//= require set
 //= require_tree
 //= require_self
 

@@ -23,3 +23,4 @@ doc/
 .DS_Store
 .rvmrc
 routes.txt
+public/assets
