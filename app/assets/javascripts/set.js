@@ -1,39 +1,30 @@
 // ----------------------------------------------------------------------------
 // markItUp!
 // ----------------------------------------------------------------------------
-// Copyright (C) 2008 Jay Salvat
+// Copyright (C) 2011 Jay Salvat
 // http://markitup.jaysalvat.com/
 // ----------------------------------------------------------------------------
-// BBCode tags example
-// http://en.wikipedia.org/wiki/Bbcode
+// Html tags
+// http://en.wikipedia.org/wiki/html
 // ----------------------------------------------------------------------------
-// Feel free to add more tags
+// Basic set. Feel free to add more tags
 // ----------------------------------------------------------------------------
-mySettings = {
-	previewParserPath:	'', // path to your BBCode parser
-	markupSet: [
-		{name:'Bold', key:'B', openWith:'[b]', closeWith:'[/b]'},
-		{name:'Italic', key:'I', openWith:'[i]', closeWith:'[/i]'},
-		{name:'Underline', key:'U', openWith:'[u]', closeWith:'[/u]'},
+var mySettings = {
+	onShiftEnter:  	{keepDefault:false, replaceWith:'<br />\n'},
+	onCtrlEnter:  	{keepDefault:false, openWith:'\n<p>', closeWith:'</p>'},
+	onTab:    		{keepDefault:false, replaceWith:'    '},
+	markupSet:  [ 	
+		{name:'Bold', key:'B', openWith:'(!(<strong>|!|<b>)!)', closeWith:'(!(</strong>|!|</b>)!)' },
+		{name:'Italic', key:'I', openWith:'(!(<em>|!|<i>)!)', closeWith:'(!(</em>|!|</i>)!)'  },
+		{name:'Stroke through', key:'S', openWith:'<del>', closeWith:'</del>' },
 		{separator:'---------------' },
-		{name:'Picture', key:'P', replaceWith:'[img][![Url]!][/img]'},
-		{name:'Link', key:'L', openWith:'[url=[![Url]!]]', closeWith:'[/url]', placeHolder:'Your text to link here...'},
+		{name:'Bulleted List', openWith:'    <li>', closeWith:'</li>', multiline:true, openBlockWith:'<ul>\n', closeBlockWith:'\n</ul>'},
+		{name:'Numeric List', openWith:'    <li>', closeWith:'</li>', multiline:true, openBlockWith:'<ol>\n', closeBlockWith:'\n</ol>'},
 		{separator:'---------------' },
-		{name:'Size', key:'S', openWith:'[size=[![Text size]!]]', closeWith:'[/size]',
-		dropMenu :[
-			{name:'Big', openWith:'[size=200]', closeWith:'[/size]' },
-			{name:'Normal', openWith:'[size=100]', closeWith:'[/size]' },
-			{name:'Small', openWith:'[size=50]', closeWith:'[/size]' }
-		]},
+		{name:'Picture', key:'P', replaceWith:'<img src="[![Source:!:http://]!]" alt="[![Alternative text]!]" />' },
+		{name:'Link', key:'L', openWith:'<a href="[![Link:!:http://]!]"(!( title="[![Title]!]")!)>', closeWith:'</a>', placeHolder:'Your text to link...' },
 		{separator:'---------------' },
-		{name:'Bulleted list', openWith:'[list]\n', closeWith:'\n[/list]'},
-		{name:'Numeric list', openWith:'[list=[![Starting number]!]]\n', closeWith:'\n[/list]'}, 
-		{name:'List item', openWith:'[*] '},
-		{separator:'---------------' },
-		{name:'Quotes', openWith:'[quote]', closeWith:'[/quote]'},
-		{name:'Code', openWith:'[code]', closeWith:'[/code]'}, 
-		{separator:'---------------' },
-		{name:'Clean', className:"clean", replaceWith:function(markitup) { return markitup.selection.replace(/\[(.*?)\]/g, "") } },
-		{name:'Preview', className:"preview", call:'preview' }
+		{name:'Clean', className:'clean', replaceWith:function(markitup) { return markitup.selection.replace(/<(.*?)>/g, "") } },		
+		{name:'Preview', className:'preview',  call:'preview'}
 	]
 }
