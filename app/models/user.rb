@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
-    attr_accessible :name, :email, :password, :password_confirmation
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  attr_accessible :name, :email, :password, :password_confirmation
+
   has_secure_password
+
   has_many :microposts, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
@@ -9,16 +13,18 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
   has_many :issues
-    
 
   before_save :create_remember_token
 
   validates :name,  presence: true, length: { maximum: 50 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
+  # Returns users that have at least 1 published issue.
+  scope :have_published_issues, where{id >> Issue.published_issues.map(&:user_id).uniq}
 
   def feed
     Micropost.from_users_followed_by(self)
@@ -38,7 +44,7 @@ class User < ActiveRecord::Base
 
   private
 
-    def create_remember_token
-      self.remember_token = SecureRandom.urlsafe_base64
-    end
+  def create_remember_token
+    self.remember_token = SecureRandom.urlsafe_base64
+  end
 end
