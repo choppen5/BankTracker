@@ -5,7 +5,7 @@
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-      Name: First L. initial  
+      Name: First L. initial
       <%= f.text_field :name %>
 
       Email: Used for login - not spam!
@@ -19,5 +19,15 @@
 
       <%= f.submit "Create my account", :class => "btn btn-large btn-primary" %>
     <% end %>
+  </div>
+
+  <div class="span 4 offset1">
+    <p>What am I signing up for?</p>
+    <ul>
+      <li>Point 1</li>
+      <li>Point 2</li>
+      <li>Point 3</li>
+      <li>Point 4</li>
+    </ul>
   </div>
 </div>
