@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
 
   # Returns users that have at least 1 published issue.
-  scope :have_published_issues, where{id >> Issue.published_issues.map(&:user_id).uniq}
+  scope :have_published_issues, lambda { where{id >> Issue.published_issues.map(&:user_id).uniq} }
 
   def feed
     Micropost.from_users_followed_by(self)
