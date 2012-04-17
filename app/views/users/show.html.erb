@@ -4,47 +4,44 @@
     <section>
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>  
-      </h1> 
+        <%= @user.name %>
+      </h1>
     </section>
- 
-    <% unless (@user.issues.first.nil? or @user.issues.first.company.nil?) %> 
+
+    <% unless (@user.issues.first.nil? or @user.issues.first.company.nil?) %>
       <h3>Company:</h3>
       <%= @user.issues.first.company.name %>
-	  <section>
- 	  <p>
-	    <%= @user.issues.first.story %>
-	  </p>
-	  </section>
+      <section>
+        <p> <%= @user.issues.first.story %> </p>
+      </section>
     <% else %>
-        <%if current_user?(@user) %> 
-    	<section>
-	    <h1>Your Mortgage Company</h1>
-	     <%= form_for( @user.issues.build) do |user_form| %>	        
-	        <div class="field">
-	         <%= collection_select(:issue, :company_id, Company.all, :id, :name, :prompt => true) %>
-	        </div>
-	        <h1>Your Story*</h1>
-			<div class="field">
-	          <%= user_form.text_area :story, placeholder: "What's your story?" %>
-	        </div>
-		    <%= user_form.hidden_field(:user_id, :value => @user.id) %>
-	        <%= user_form.submit "Post", class: "btn btn-large btn-primary" %>
-	      <% end %>
-	    </section>
-	    <% end %>
-     <% end %>
-  
+      <%if current_user?(@user) %>
+        <section>
+          <h1>Your Mortgage Company</h1>
+          <%= simple_form_for @user.issues.build, :input_html => { :class => "form-horizontal" } do |f| %>
+            <div class="form-inputs">
+              <%= f.association :company, :label => false, :prompt => true -%>
+              <h1>Your Story*</h1>
+              <%= f.input :story, placeholder: "What's your story?", :label => false %>
+              <%= f.hidden_field(:user_id, :value => @user.id) %>
+            </div>
+
+            <div class="form-actions">
+              <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+            </div>
+          <% end %>
+        </section>
+      <% end %>
+    <% end %>
   </aside>
+
   <div class="span8">
     <%= render 'follow_form' if signed_in? %>
-    
      <% if current_user?(@user) and (@user.issues.count > 0)  %>
       <div class="postform">
         <%= render 'shared/micropost_form' %>
       </div>
      <% end %>
-  
 
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>

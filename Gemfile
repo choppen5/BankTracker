@@ -9,6 +9,8 @@ gem 'bootstrap-will_paginate', '0.0.5'
 
 gem 'thin'
 gem 'squeel'
+gem 'cancan'
+gem 'simple_form'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

@@ -7,7 +7,7 @@
 
 <p>
   <b>Company:</b>
-  <%= collection_select(:issue, :company_id, Company.all, :id, :name, :prompt => true) %>
+  <%= @issue.company.name -%>
 </p>
 
 <p>
