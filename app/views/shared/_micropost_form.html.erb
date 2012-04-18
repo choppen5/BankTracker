@@ -15,10 +15,11 @@
 	  <div>
 		<div class= "companynumber">
 		  <%= @user.issues.first.company.phone 	%>
-		</div>	
-		<div class = "mystory"><p> 
-			<%= link_to("My Story", @user.issues.first) %> 
 		</div>
+		<div class = "mystory"><p> 
+			<b>Issue #: <%= @user.issues.first.id %></b> <%= link_to("details", @user.issues.first) %> 
+		</div>
+	
 
 		<%= f.hidden_field(:company_id, :value => @user.issues.first.company.id) %>
 	   

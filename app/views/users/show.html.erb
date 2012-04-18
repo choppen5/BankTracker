@@ -9,8 +9,11 @@
     </section>
 
     <% unless (@user.issues.first.nil? or @user.issues.first.company.nil?) %>
-      <h3>Company:</h3>
-      <%= @user.issues.first.company.name %>
+      <h3><b>Issue #: <%= @user.issues.first.id %></b> <%= link_to("edit", edit_issue_path(@user.issues.first)) %></h3>
+	  </br>
+      <section>
+        <b><%= @user.issues.first.company.name %></b>
+      </section>
       <section>
         <p> <%= @user.issues.first.story.html_safe %> </p>
       </section>
