@@ -14,17 +14,19 @@
       <section>
         <p> <%= @user.issues.first.story.html_safe %> </p>
       </section>
-    <% else %>
-      <%if current_user?(@user) %>
+    <% end %>
+  </aside>
+
+  <div class="span8">
+    <%- if @user.issues.empty? || @user.issues.first.company.blank? -%>
+      <% if current_user?(@user) %>
         <section>
           <%- @issue = @user.issues.build -%>
           <%= render partial: 'issues/form', locals: { :form_class => "form-vertical" } -%>
         </section>
       <% end %>
-    <% end %>
-  </aside>
+    <%- end -%>
 
-  <div class="span8">
     <%= render 'follow_form' if signed_in? %>
      <% if current_user?(@user) and (@user.issues.count > 0)  %>
       <div class="postform">

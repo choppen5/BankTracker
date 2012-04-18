@@ -1,9 +1,10 @@
 <%- form_class ||= 'form-horizontal' -%>
+
 <%= simple_form_for @issue, :html => { :class => form_class } do |f| %>
   <div class="form-inputs">
     <%= f.association :company, :include_blank => false, :label => "Your Mortgage Company" -%>
-    <%= f.input :status, :collection => Issue::STATUS, :include_blank => false -%>
-    <%= f.input :feeling, :collection => Issue::FEELING, :include_blank => false -%>
+    <%= f.input :status, :collection => Issue::STATUS, :include_blank => false, :as => :radio_buttons, :label_html => { :style => "display:inline" }, :item_wrapper_class => "inline" -%>
+    <%= f.input :feeling, :collection => Issue::FEELING, :include_blank => false, :as => :radio_buttons, :label_html => { :style => "display:inline" }, :item_wrapper_class => "inline" -%>
     <%= f.input :story, :label => "Your Story" -%>
   </div>
 
