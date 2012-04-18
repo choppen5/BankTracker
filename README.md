@@ -1,4 +1,4 @@
-# Ruby on Rails Tutorial: sample application
+# BankTracker
 
 This app is designed to let customers track their interactions with banks, and network with other customers. 
 
