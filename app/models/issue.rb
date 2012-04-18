@@ -16,7 +16,7 @@ class Issue < ActiveRecord::Base
 
   validates :company_id, presence: true
   validates :story, presence: true
-  validates_presence_of :status, :feeling
+  
 
   scope :published_issues, where{ published == true }
 end

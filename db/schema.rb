@@ -35,12 +35,12 @@ ActiveRecord::Schema.define(:version => 20120417034139) do
     t.integer  "user_id"
     t.integer  "company_id"
     t.text     "story"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "status"
     t.string   "feeling"
     t.text     "resolution"
-    t.boolean  "published",                 :default => true
+    t.boolean  "published",  :default => true
   end
 
   create_table "microposts", :force => true do |t|
