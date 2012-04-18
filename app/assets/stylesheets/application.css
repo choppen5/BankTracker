@@ -11,5 +11,7 @@
  *= require_self
  *= require skin_style
  *= require set_style
+ *= require custom
+ *= require bootstrap_and_overrides
  *= require_tree .
 */

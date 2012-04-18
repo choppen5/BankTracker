@@ -24,5 +24,5 @@ $(document).ready(function(){
     source: "/autocomplete/companies"
   })
 
-  $('.markItUp').markItUp(mySettings);
+  $('#issue_story, .markItUp').markItUp(mySettings);
 })
