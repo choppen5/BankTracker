@@ -12,7 +12,7 @@
       <h3>Company:</h3>
       <%= @user.issues.first.company.name %>
       <section>
-        <p> <%= @user.issues.first.story %> </p>
+        <p> <%= @user.issues.first.story.html_safe %> </p>
       </section>
     <% else %>
       <%if current_user?(@user) %>
