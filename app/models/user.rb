@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :avatar, :avatar_cache
 
   has_secure_password
 
@@ -20,11 +20,13 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :password, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
+  validates :password, length: { minimum: 6 }, :if => Proc.new { |u| u.password.present? || u.new_record? }
+  validates :password_confirmation, presence: true, :if => Proc.new { |u| u.password.present? }
 
   # Returns users that have at least 1 published issue.
   scope :have_published_issues, lambda { where{id >> Issue.published_issues.map(&:user_id).uniq} }
+
+  mount_uploader :avatar, AvatarUploader
 
   def feed
     Micropost.from_users_followed_by(self)
