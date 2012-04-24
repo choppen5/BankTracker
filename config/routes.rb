@@ -5,8 +5,6 @@ SampleApp::Application.routes.draw do
     end
   get '/issues/templates/preview' => 'issues#preview'
     
-  resources :cases
-
   resources :companies
 
   resources :users do
