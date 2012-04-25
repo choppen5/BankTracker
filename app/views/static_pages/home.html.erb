@@ -34,9 +34,11 @@
         <%= will_paginate @users, :page_links => false  %>
         <div class= "row-fluid">
           <% @users.each do |user| %>
+            <%- issue = user.issues.first -%>
+
             <div class="frontcompany">
               <b>Bank:</b>
-              <%= user.issues.first.company.name %>
+              <%= issue.company.name %>
             </div>
 
             <div class="row-fluid">
@@ -52,13 +54,17 @@
             <div class="row-fluid">
               <div class= "span8">
                 <b>Story:</b>
-                <%= user.issues.first.story.html_safe %>
+                <%= issue.story.html_safe %>
               </div>
               <div class= "span4">
                 <div class="frontinteractions">
                   <% if user.microposts.any? %>
-                    <b>Updates (<%= user.issues.first.microposts.count %>)</b>
+                    <b>Updates (<%= issue.microposts.count %>)</b>
                   <% end %>
+                  <%- handler = issue.company.twitter_handler -%>
+                  <%- handler = handler.present?? "@#{handler}" : "" -%>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-url="" data-text="<%= issue.story[0,130] -%> <%= handler -%>"
+                   data-count="horizontal">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
                 </div>
               </div>
             </div>
