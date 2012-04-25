@@ -1,44 +1,29 @@
-<%= form_for(@micropost) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
- 
- <% unless @user.issues.first.nil?%> 
+<%= simple_form_for @micropost do |f| %>
+  <% unless @user.issues.first.nil?%>
+    <% if @user.issues.first.company.nil? %>
+      <div class="field">
+        <%= collection_select(:micropost, :company_id, Company.all, :id, :name, :prompt => true) %>
+      </div>
+    <% else %>
+        <div class= "companyname">
+      <b>
+        <%= @user.issues.first.company.name 	%>
+        </b>
+      <div>
+      <div class= "companynumber">
+        <%= @user.issues.first.company.phone 	%>
+      </div>
+      <div class = "mystory"><p>
+        <b>Issue #: <%= @user.issues.first.id %></b> <%= link_to("details", @user.issues.first) %>
+      </div>
 
-  <% if @user.issues.first.company.nil? %>
-	  <div class="field">
-	    <%= collection_select(:micropost, :company_id, Company.all, :id, :name, :prompt => true) %>
-	  </div>
+      <%- label = "Minutes: #{link_to("+", "#", class: "plus")} #{link_to("-", "#", class: "minus")}" -%>
+      <%= f.input :company_id, :value => @user.issues.first.company.id, :as => :hidden %>
+      <%= f.input :content, placeholder: "Update your " + @user.issues.first.company.name + " issue...", :label => false %>
+      <%= f.input :minutes, placeholder: "Minutes spent", min: 0, as: :string, input_html: { value: 0, class: "span1", onKeyPress: "return numbersonly(this, event)" }, label: label -%>
+    <% end %>
+    <%= f.submit "Post", class: "btn btn-large btn-primary" %>
   <% else %>
-      <div class= "companyname"> 
-		<b> 
-	    <%= @user.issues.first.company.name 	%>
-	    </b>
-	  <div>
-		<div class= "companynumber">
-		  <%= @user.issues.first.company.phone 	%>
-		</div>
-		<div class = "mystory"><p> 
-			<b>Issue #: <%= @user.issues.first.id %></b> <%= link_to("details", @user.issues.first) %> 
-		</div>
-	
-
-		<%= f.hidden_field(:company_id, :value => @user.issues.first.company.id) %>
-	   
-		
-		  <div class="field">
-		    <%= f.text_area :content, placeholder: "Update your " + @user.issues.first.company.name + " issue..." %>
-		  </div>
-		 
-		<div class = "minutes"><p> 
-			<%= f.number_field(:minutes, placeholder: "Minutes spent",  :min =>0) %> 
-		</div>
-		
-		
-		
-  <% end %>	
-  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
-
- <% else %>
-   <%= link_to("Add a bank", @user) %>  
- <% end %>
- 
+    <%= link_to("Add a bank", @user) %>
+  <% end %>
 <% end %>

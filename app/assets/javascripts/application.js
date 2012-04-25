@@ -25,4 +25,42 @@ $(document).ready(function(){
   })
 
   $('#issue_story, .markItUp').markItUp(mySettings);
+
+  $('.plus').live('click', function() {
+    var input = $('#micropost_minutes');
+    var current_val = parseInt($(input).val()) || 0;
+    $(input).val(current_val + 1);
+    return false;
+  })
+
+  $('.minus').live('click', function() {
+    var input = $('#micropost_minutes');
+    var current_val = parseInt($(input).val()) || 1;
+    if (current_val == 0) { current_val = 1};
+    $(input).val(current_val - 1);
+    return false;
+  })
 })
+
+function numbersonly(myfield, e, dec) {
+  var key;
+  var keychar;
+
+  if (window.event)
+    key = window.event.keyCode;
+  else if (e)
+    key = e.which;
+  else
+    return true;
+    keychar = String.fromCharCode(key);
+    if ((key==null) || (key==0) || (key==8) || (key==9) || (key==13) || (key==27) ) // control keys
+      return true;
+    else if ((("0123456789").indexOf(keychar) > -1)) // numbers
+      return true;
+    else if (dec && (keychar == ".")) { // decimal point jump
+      myfield.form.elements[dec].focus();
+      return false;
+    }
+    else
+      return false;
+};

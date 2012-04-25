@@ -31,12 +31,13 @@
       <% end %>
     <%- end -%>
 
-    <%= render 'follow_form' if signed_in? %>
-     <% if current_user?(@user) and (@user.issues.count > 0)  %>
+    <%= render 'users/follow_form' if signed_in? %>
+
+    <% if current_user?(@user) and (@user.issues.count > 0)  %>
       <div class="postform">
         <%= render 'shared/micropost_form' %>
       </div>
-     <% end %>
+    <% end %>
 
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
