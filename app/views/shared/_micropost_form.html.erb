@@ -17,10 +17,10 @@
         <b>Issue #: <%= @user.issues.first.id %></b> <%= link_to("details", @user.issues.first) %>
       </div>
 
-      <%- label = "Minutes: #{link_to("+", "#", class: "plus")} #{link_to("-", "#", class: "minus")}" -%>
+      <%- label = "Minutes Spent: #{link_to("+", "#", class: "plus")} #{link_to("-", "#", class: "minus")}" -%>
       <%= f.input :company_id, :value => @user.issues.first.company.id, :as => :hidden %>
       <%= f.input :content, placeholder: "Update your " + @user.issues.first.company.name + " issue...", :label => false %>
-      <%= f.input :minutes, placeholder: "Minutes spent", min: 0, as: :string, input_html: { class: "span1", onKeyPress: "return numbersonly(this, event)" }, label: label -%>
+      <%= f.input :minutes, placeholder: "0", min: 0, as: :string, input_html: { class: "span1", onKeyPress: "return numbersonly(this, event)" }, label: label -%>
     <% end %>
     <%= f.submit "Post", class: "btn btn-large btn-primary" %>
   <% else %>
