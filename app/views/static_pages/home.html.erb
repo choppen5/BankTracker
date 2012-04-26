@@ -62,8 +62,8 @@
                     <b>Updates (<%= issue.microposts.count %>)</b>
                   <% end %>
                   <%- handler = issue.company.twitter_handler -%>
-                  <%- handler = handler.present?? "@#{handler}" : "" -%>
-                  <a href="https://twitter.com/share" class="twitter-share-button" data-text="<%= issue.story[0,80]-%> <%= handler -%>"
+                  <%- handler = handler.present?? "@#{handler}" : "\##{issue.company.name.gsub(/\s+/, "")}" -%>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-text="<%= issue.story[0,80]-%>... <%= handler -%>"
                    data-count="horizontal">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
                 </div>
               </div>
