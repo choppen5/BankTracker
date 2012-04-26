@@ -12,6 +12,7 @@ gem 'squeel'
 gem 'cancan'
 gem 'simple_form'
 
+
 gem 'carrierwave'
 gem 'rmagick', :require => "RMagick"
 gem 'fog'
@@ -43,5 +44,6 @@ end
 
 group :production do
   gem 'pg', '0.12.2'
+  gem 'rack-google_analytics'
 end
 
