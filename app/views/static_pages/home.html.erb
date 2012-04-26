@@ -63,7 +63,7 @@
                   <% end %>
                   <%- handler = issue.company.twitter_handler -%>
                   <%- handler = handler.present?? "@#{handler}" : "" -%>
-                  <a href="https://twitter.com/share" class="twitter-share-button" data-url="" data-text="<%= issue.story[0,130] -%> <%= handler -%>"
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-text="<%= issue.story[0,120]-%> <%= handler -%>"
                    data-count="horizontal">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
                 </div>
               </div>
